@@ -1,6 +1,12 @@
 #!/bin/bash
 
-# NASA API Key
+# Check for API key as argument
+if [ -z "$1" ]; then
+  echo "❌ No API key provided. Usage: ./fetch_apod.sh <API_KEY>"
+  exit 1
+fi
+
+API_KEY="$1"
 DATE=$(date '+%Y-%m-%d')
 OUTPUT_FILE="apod_${DATE}.md"
 IMAGE_FILE="apod_${DATE}.jpg"
@@ -28,7 +34,6 @@ echo
 echo "![APOD Image]($IMAGE_FILE)"
 echo
 echo "$explanation"
-echo
 [ "$copyright" != "null" ] && echo "📸 *Image credit: $copyright*"
 } > "$OUTPUT_FILE"
 
@@ -41,7 +46,6 @@ echo
 echo "![APOD Image]($IMAGE_FILE)"
 echo
 echo "$explanation"
-echo
 [ "$copyright" != "null" ] && echo "*Image credit: $copyright*"
 echo
 echo "---"

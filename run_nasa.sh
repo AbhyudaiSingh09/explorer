@@ -1,21 +1,25 @@
 #!/bin/bash
 
-# Run the script that fetches APOD and generates output
-./fetch_apod.sh
+# Check for API key argument
+if [ -z "$1" ]; then
+  echo "❌ Usage: ./run_nasa.sh <API_KEY>"
+  exit 1
+fi
 
-# Get today's date for image file name
+API_KEY="$1"
 DATE=$(date '+%Y-%m-%d')
 IMAGE_FILE="apod_${DATE}.jpg"
 
-# Commit and push the changes
+# Run fetch script with API key
+./fetch_apod.sh "$API_KEY"
+
+# Commit and push
 git add .
 git commit -m "Update APOD for $DATE"
 git push origin main
 
-# Delete the image after successful push
+# Remove image after push
 if [ -f "$IMAGE_FILE" ]; then
   rm "$IMAGE_FILE"
   echo "🗑️ Deleted image file: $IMAGE_FILE"
-else
-  echo "⚠️ Image file not found: $IMAGE_FILE"
 fi
