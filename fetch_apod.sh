@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # NASA API Key
-API_KEY="EAZJyZnBcZ5U66Aw7PdRnAkkBvb49ahoJQe51sUW"
 DATE=$(date '+%Y-%m-%d')
 OUTPUT_FILE="apod_${DATE}.md"
 IMAGE_FILE="apod_${DATE}.jpg"
